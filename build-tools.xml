@@ -51,7 +51,7 @@
 	<target name="generate-project" depends="init-project-template">
 		<input message="请输入工程名称:" addProperty="generate.project.name"></input>
 		<input message="请输入包名:如:com.faceye" addProperty="generate.project.package.name"></input>
-		<input message="请输入包名:如:com/faceye" addProperty="generate.project.package.path"></input>
+		<input message="请输入包路径:如:com.faceye 对应为:com/faceye" addProperty="generate.project.package.path"></input>
 		<input message="请输入MySQL数据库用户名(Root权限):" addProperty="generate.project.db.user.name"></input>
 		<input message="请输入MySQL数据库密码:" addProperty="generate.project.db.user.password"></input>
 		<input
