@@ -354,27 +354,27 @@
 		</replace>
 
 		<!-- 移动java文件 -->
-		<move file="${output.dir}/source/main/java/Example.java" tofile="${component.path}/entity/${entity.name}.java"></move>
+		<move file="${output.dir}/source/main/java/Example.java" tofile="${component.path}/entity/${entity.name}.java" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/java/ExampleRepository.java"
-			tofile="${component.path}/repository/${entity.name}Repository.java"></move>
+			tofile="${component.path}/repository/${entity.name}Repository.java"  encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/java/ExampleService.java"
-			tofile="${component.path}/service/${entity.name}Service.java"></move>
+			tofile="${component.path}/service/${entity.name}Service.java" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/java/ExampleServiceImpl.java"
-			tofile="${component.path}/service/impl/${entity.name}ServiceImpl.java"></move>
+			tofile="${component.path}/service/impl/${entity.name}ServiceImpl.java" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/java/ExampleController.java"
-			tofile="${component.path}/controller/${entity.name}Controller.java"></move>
+			tofile="${component.path}/controller/${entity.name}Controller.java" encoding="UTF-8"></move>
 		<!-- 移动测试类 -->
 		<move file="${output.dir}/source/test/java/ExampleRepositoryTestCase.java"
-			tofile="${basedir}/src/test/java/${package.path}/test/component/${component.name}/repository/${entity.name}RepositoryTestCase.java"></move>
+			tofile="${basedir}/src/test/java/${package.path}/test/component/${component.name}/repository/${entity.name}RepositoryTestCase.java" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/test/java/ExampleServiceTestCase.java"
-			tofile="${basedir}/src/test/java/${package.path}/test/component/${component.name}/service/${entity.name}ServiceTestCase.java"></move>
+			tofile="${basedir}/src/test/java/${package.path}/test/component/${component.name}/service/${entity.name}ServiceTestCase.java" encoding="UTF-8"></move>
 
 		<!-- 移动properties文件 -->
 		<native2ascii encoding="UTF-8"
 			src="${output.dir}/source/main/resources/i18n" includes="Entity_zh_CN.source"
 			dest="${basedir}/src/main/resources/i18n"></native2ascii>
 		<move file="${basedir}/src/main/resources/i18n/Entity_zh_CN.source"
-			tofile="${basedir}/src/main/resources/i18n/${entity.config.name}_zh_CN.properties"></move>
+			tofile="${basedir}/src/main/resources/i18n/${entity.config.name}_zh_CN.properties" encoding="UTF-8"></move>
 
 		<!-- 将资源文件配置到applicationContext-web.xml -->
 		<loadfile property="i18n-config"
@@ -389,20 +389,20 @@
 		<!-- 移动tiles文件（manager) -->
 		<move
 			file="${output.dir}/source/main/resources/tiles/tiles-manager-defs-template.xml"
-			tofile="${basedir}/src/main/resources/tiles/manager/tiles-manager-${entity.config.name}-defs.xml"></move>
+			tofile="${basedir}/src/main/resources/tiles/manager/tiles-manager-${entity.config.name}-defs.xml" encoding="UTF-8"></move>
 		<!-- 移动jsp文件 -->
 		<move file="${output.dir}/source/main/webapp/jsp/Entity_update.jsp"
-			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_update.jsp"></move>
+			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_update.jsp" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/webapp/jsp/Entity_detail.jsp"
-			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_detail.jsp"></move>
+			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_detail.jsp" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/webapp/jsp/Entity_center.jsp"
-			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_center.jsp"></move>
+			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_center.jsp" encoding="UTF-8"></move>
 		<!-- 移动js文件 -->
 		<move file="${output.dir}/source/main/webapp/js/Entity.js"
-			tofile="${basedir}/src/main/webapp/js/component/${component.name}/${entity.config.name}/${entity.config.name}.js"></move>
+			tofile="${basedir}/src/main/webapp/js/component/${component.name}/${entity.config.name}/${entity.config.name}.js" encoding="UTF-8"></move>
 		<!-- 移动css文件 -->
 		<move file="${output.dir}/source/main/webapp/css/Entity.css"
-			tofile="${basedir}/src/main/webapp/css/component/${component.name}/${entity.config.name}/${entity.config.name}.css"></move>
+			tofile="${basedir}/src/main/webapp/css/component/${component.name}/${entity.config.name}/${entity.config.name}.css" encoding="UTF-8"></move>
 		<!-- 生成管理菜单 -->
 		<loadfile property="entity.manager.menu.jsp.source"
 			srcFile="${output.dir}/source/main/webapp/jsp/Entity_manager_list_group_item.jsp"
