@@ -2,7 +2,7 @@
 <!-- 使用ant 自动生成基础代码框架 -->
 <!-- Author @haipenge -->
 <!-- E-mail:haipenge@gmail.com -->
-<project name="generate-tools" basedir=".">
+<project name="generate-tools" basedir="." default="help">
 	<!-- 定义常量 -->
 	<!-- 临时输出目录 -->
 	<property name="output.dir" value="${basedir}/target/output"></property>
