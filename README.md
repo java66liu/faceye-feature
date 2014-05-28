@@ -57,6 +57,7 @@ faceye-feature
        product ->生产
        
       6.打包：
+       快速启动：mvn clean compile jetty:run -Dmaven.test.skip=true
        测试包：mvn clean compile war:war -P test -Dmaven.test.skip=true
        生长包: mvn clean compile war:war -P product -Dmaven.test.skip=true
       
