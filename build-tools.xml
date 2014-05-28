@@ -648,6 +648,7 @@
 				<include name="*.xml"></include>
 			</fileset>
 		</copy>
+		
 		<copy todir="${basedir}/src/template/project" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${output.dir}/project">
 				<include name="**/**/**.*"></include>
