@@ -23,4 +23,5 @@
 	<import resource="classpath*:/conf/applicationContext-jpa.xml" />
 	<import resource="classpath*:/conf/applicationContext-cache.xml" />
 	<import resource="classpath*:/conf/applicationContext-config.xml" />
+		<import resource="classpath*:/conf/applicationContext-init.xml" />
 </beans>

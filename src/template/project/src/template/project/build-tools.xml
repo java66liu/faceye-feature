@@ -10,7 +10,41 @@
 	<!-- 默认包名 -->
 	<property file="build.properties"></property>
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties" />
-	<target name="info"></target>
+	<target name="info">
+		<echo>*****************************************************************
+		</echo>
+		<echo>************FaceYe 项目自助化工具*************</echo>
+		<echo>****解决问题:解决项目初期搭建调度与集成耗时现像</echo>
+		<echo>****项目模板包括:</echo>
+		<echo>1.Web前端.</echo>
+		<echo>2.管理后台.</echo>
+		<echo>3.移动服务端.</echo>
+		<echo>4.andorid(todo).</echo>
+		<echo>5.ios(todo)</echo>
+		<echo>****相关技术:</echo>
+		<echo>****1.spring mvc</echo>
+		<echo>****2.tiles,jstl.</echo>
+		<echo>****3.spring-data-jpa</echo>
+		<echo>****4.spring-data-redis</echo>
+		<echo>****5.spring-data-mongo</echo>
+		<echo>****6.hibernate</echo>
+		<echo>****7.maven</echo>
+		<echo>****8.ant</echo>
+		<echo>****Github:https://github.com/haipenge/faceye-feature.git
+		</echo>
+		<echo>****与作者联系--></echo>
+		<echo>****Author:@haipenge</echo>
+		<echo>****Email:haipenge@gmail.com</echo>
+		<echo>*****************************************************************
+		</echo>
+	</target>
+	<target name="help" depends="info">
+	    <echo>1.创建一个新项目: generate-project</echo>
+	    <echo>2.创建一个模块:   generate-component</echo>
+	    <echo>3.创建实体    :  generate-entity-source</echo>
+	    <echo>4.为实体增加属性: generate-entity-property</echo>
+	    <echo>5.修改模板:修改src/template/source 下的模板类</echo>
+	</target>
 	<!-- 创建或覆盖一个工程 -->
 	<target name="generate-project" depends="init-project-template">
 		<input message="请输入工程名称:" addProperty="generate.project.name"></input>
@@ -126,17 +160,20 @@
 			</fileset>
 		</copy>
 		<replace dir="${output.dir}/project">
+		    <exclude name="pom.xml"></exclude>
 			<replacefilter token="com.faceye" value="${generate.project.package.name}"></replacefilter>
 			<replacefilter token="faceye-" value="${generate.project.name}-"></replacefilter>
 		</replace>
 		<!-- 替换数据库信息 -->
-		<replace dir="${output.dir}/project/src/main/filters">
-			<include name="*.properties"></include>
+		<replace dir="${output.dir}/project/src/main">
+			<include name="**/**/*.properties"></include>
+			<include name="**/**/*.sql"></include>
 			<replacefilter token="facey_feature" value="${generate.project.name}"></replacefilter>
 			<replacefilter token="feature" value="${generate.project.db.user.name}"></replacefilter>
 			<replacefilter token="123456"
 				value="${generate.project.db.user.password}"></replacefilter>
 		</replace>
+
 	</target>
 	<!-- 创建项目管理后台 -->
 	<target name="generate-project-manager">
@@ -332,9 +369,12 @@
 			tofile="${basedir}/src/test/java/${package.path}/test/component/${component.name}/service/${entity.name}ServiceTestCase.java"></move>
 
 		<!-- 移动properties文件 -->
-		<native2ascii encoding="UTF-8" src="${output.dir}/source/main/resources/i18n" includes="Entity_zh_CN.source" dest="${basedir}/src/main/resources/i18n"></native2ascii>
-		<move file="${basedir}/src/main/resources/i18n/Entity_zh_CN.source" tofile="${basedir}/src/main/resources/i18n/${entity.config.name}_zh_CN.properties"></move>
-		
+		<native2ascii encoding="UTF-8"
+			src="${output.dir}/source/main/resources/i18n" includes="Entity_zh_CN.source"
+			dest="${basedir}/src/main/resources/i18n"></native2ascii>
+		<move file="${basedir}/src/main/resources/i18n/Entity_zh_CN.source"
+			tofile="${basedir}/src/main/resources/i18n/${entity.config.name}_zh_CN.properties"></move>
+
 		<!-- 将资源文件配置到applicationContext-web.xml -->
 		<loadfile property="i18n-config"
 			srcFile="${output.dir}/source/main/resources/i18n/Entity_i18n_config.source"></loadfile>
@@ -383,17 +423,19 @@
 			<param name="entity.name" value="${entity.name}"></param>
 			<param name="entity.config.name" value="${entity.config.name}"></param>
 		</antcall>
-		<input message="是否继续生成其它属性? &#10;y--->继续生成其它属性.&#10;n--->结束生成.&#10;&#10;注:可以调用 [ generate-entity-property ] 生成任意属性。" addProperty="is.generate.property.continue"></input>
-		 <if>
-		     <equals arg1="${is.generate.property.continue}" arg2="y"></equals>
-		     <then>
-		         <antcall target="generate-entity-property">
-		             <param name="component.name" value="${component.name}"></param>
-			         <param name="entity.name" value="${entity.name}"></param>
-			         <param name="entity.config.name" value="${entity.config.name}"></param>
-		         </antcall>
-		     </then>
-		 </if>
+		<input
+			message="是否继续生成其它属性? &#10;y--->继续生成其它属性.&#10;n--->结束生成.&#10;&#10;注:可以调用 [ generate-entity-property ] 生成任意属性。"
+			addProperty="is.generate.property.continue"></input>
+		<if>
+			<equals arg1="${is.generate.property.continue}" arg2="y"></equals>
+			<then>
+				<antcall target="generate-entity-property">
+					<param name="component.name" value="${component.name}"></param>
+					<param name="entity.name" value="${entity.name}"></param>
+					<param name="entity.config.name" value="${entity.config.name}"></param>
+				</antcall>
+			</then>
+		</if>
 		<echo message="如要继续生成其它属性,请使用 generate-entity-property task."></echo>
 	</target>
 	<!-- 删除生成的实体 -->
@@ -439,7 +481,8 @@
 		<input message="请输入实体配置名,如:User->user" addProperty="entity.config.name"></input>
 		<input message="请输入属性类型,如:String" addProperty="property.type"></input>
 		<input message="请输入属性名,如:name" addProperty="property.name"></input>
-		<input message="请输入方法名,如输入:Name,将会增加getName(),setName()" addProperty="property.method"></input>
+		<input message="请输入方法名,如输入:Name,将会增加getName(),setName()"
+			addProperty="property.method"></input>
 		<input
 			message="请输入数据库字段名,可为空,直接回车则默认为属性名${property.name},翻译为数据库字段时遵循马鞍命名：如userAddress->user_address"
 			addProperty="column.name"></input>
@@ -473,7 +516,7 @@
 				<include name="${entity.config.name}_zh_CN.properties"></include>
 			</fileset>
 		</copy>
-		
+
 		<!-- 处理java类,properties,jsp,xml -->
 		<replace dir="${output.dir}/source/main" encoding="UTF-8">
 			<include name="**/**/*.*"></include>
@@ -515,8 +558,10 @@
 				<include name="Entity_property_i18n.properties" />
 			</fileset>
 		</concat>
-		<native2ascii encoding="UTF-8" src="${output.dir}/source/main/resources/i18n" includes="${entity.config.name}_zh_CN.properties" dest="${basedir}/src/main/resources/i18n"></native2ascii>
-		
+		<native2ascii encoding="UTF-8"
+			src="${output.dir}/source/main/resources/i18n" includes="${entity.config.name}_zh_CN.properties"
+			dest="${basedir}/src/main/resources/i18n"></native2ascii>
+
 		<!-- 处理jsp-center -->
 		<!--@generate-entity-jsp-property-value@ -->
 		<replaceregexp encoding="UTF-8" flags="g">
@@ -579,7 +624,7 @@
 		</replace>
 		<echo
 			message="已为实体${entity.name}生成属性${property.type} ${property.name},并已生成getter/setter.对应数据库字段为:${column.name}"></echo>
-		
+
 	</target>
 
 	<target name="clean-generate-path">
