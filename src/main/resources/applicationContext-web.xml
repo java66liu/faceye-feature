@@ -35,7 +35,8 @@
 			<property name="supportMediaTypes" value="application/json;charset=UTF-8"></property> 
 			</bean> </mvc:message-converters> -->
 	</mvc:annotation-driven>
-	<mvc:view-controller path="/" view-name="/default.jsp" />
+	<!-- 
+	<mvc:view-controller path="/" view-name="/default.jsp" /> -->
 	<!-- 视图解释类 <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
 		<property name="prefix" value="/" /> <property name="suffix" value=".jsp" 
 		/> <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" 
