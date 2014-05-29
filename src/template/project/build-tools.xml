@@ -2,7 +2,7 @@
 <!-- 使用ant 自动生成基础代码框架 -->
 <!-- Author @haipenge -->
 <!-- E-mail:haipenge@gmail.com -->
-<project name="generate-tools" basedir=".">
+<project name="generate-tools" basedir="." default="help">
 	<!-- 定义常量 -->
 	<!-- 临时输出目录 -->
 	<property name="output.dir" value="${basedir}/target/output"></property>
@@ -51,7 +51,7 @@
 	<target name="generate-project" depends="init-project-template">
 		<input message="请输入工程名称:" addProperty="generate.project.name"></input>
 		<input message="请输入包名:如:com.faceye" addProperty="generate.project.package.name"></input>
-		<input message="请输入包名:如:com/faceye" addProperty="generate.project.package.path"></input>
+		<input message="请输入包路径:com.faceye 对应为:com/faceye" addProperty="generate.project.package.path"></input>
 		<input message="请输入MySQL数据库用户名(Root权限):" addProperty="generate.project.db.user.name"></input>
 		<input message="请输入MySQL数据库密码:" addProperty="generate.project.db.user.password"></input>
 		<input
@@ -130,14 +130,13 @@
 		<input message="请输入MySQL数据库用户名(Root权限):" addProperty="generate.project.db.user.name"></input>
 		<input message="请输入MySQL数据库密码:" addProperty="generate.project.db.user.password"></input>
 		<mkdir dir="${output.dir}/project"></mkdir>
-		<copy todir="${output.dir}/project" overwrite="true" encoding="UTF-8"
-			outputencoding="UTF-8">
+		<copy todir="${output.dir}/project" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src/template/project">
 				<exclude name="src/main/java/com/faceye/**"></exclude>
 				<exclude name="src/test/java/com/faceye/**"></exclude>
 			</fileset>
 		</copy>
-		<replace file="${output.dir}/project/build.properties">
+		<replace file="${output.dir}/project/build.properties" encoding="UTF-8">
 			<replacefilter token="@package@" value="${generate.project.package.name}"></replacefilter>
 			<replacefilter token="@package.path@" value="${generate.project.package.path}"></replacefilter>
 		</replace>
@@ -161,13 +160,13 @@
 				<include name="**/**/*.java"></include>
 			</fileset>
 		</copy>
-		<replace dir="${output.dir}/project">
+		<replace dir="${output.dir}/project"  encoding="UTF-8">
 		    <exclude name="pom.xml"></exclude>
 			<replacefilter token="com.faceye" value="${generate.project.package.name}"></replacefilter>
 			<replacefilter token="faceye-" value="${generate.project.name}-"></replacefilter>
 		</replace>
 		<!-- 替换数据库信息 -->
-		<replace dir="${output.dir}/project/src/main">
+		<replace dir="${output.dir}/project/src/main"  encoding="UTF-8">
 			<include name="**/**/*.properties"></include>
 			<include name="**/**/*.sql"></include>
 			<replacefilter token="facey_feature" value="${generate.project.name}"></replacefilter>
@@ -190,7 +189,7 @@
 				<include name="**/**/*.*"></include>
 			</fileset>
 		</copy>
-		<replace dir="${generate.project.manager.path}">
+		<replace dir="${generate.project.manager.path}"  encoding="UTF-8">
 			<include name="pom.xml"></include>
 			<replacefilter token="faceye-feature" value="${generate.project.name}-manager"></replacefilter>
 		</replace>
@@ -208,7 +207,7 @@
 				<include name="**/**/*.*"></include>
 			</fileset>
 		</copy>
-		<replace dir="${generate.project.web.path}">
+		<replace dir="${generate.project.web.path}"  encoding="UTF-8">
 			<include name="pom.xml"></include>
 			<replacefilter token="faceye-feature" value="${generate.project.name}-web"></replacefilter>
 		</replace>
@@ -231,7 +230,7 @@
 				<exclude name="src/main/webapp/**/**/**.gif"></exclude>
 			</fileset>
 		</copy>
-		<replace dir="${generate.project.server.path}">
+		<replace dir="${generate.project.server.path}"  encoding="UTF-8">
 			<include name="pom.xml"></include>
 			<replacefilter token="faceye-feature" value="${generate.project.name}-server"></replacefilter>
 		</replace>
@@ -304,49 +303,49 @@
 		<mkdir
 			dir="${basedir}/src/main/webapp/css/component/${component.name}/${entity.config.name}/"></mkdir>
 		<!-- 拷贝java文件 -->
-		<copy todir="${output.dir}/source/main/java">
+		<copy todir="${output.dir}/source/main/java" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src/template/source/main/java">
 				<include name="*.java"></include>
 			</fileset>
 		</copy>
-		<copy todir="${output.dir}/source/test/java">
+		<copy todir="${output.dir}/source/test/java" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src/template/source/test/java">
 				<include name="*.java"></include>
 			</fileset>
 		</copy>
 		<!-- 拷贝资源文件 -->
-		<copy todir="${output.dir}/source/main/resources/i18n">
+		<copy todir="${output.dir}/source/main/resources/i18n" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src/template/source/main/resources/i18n">
 				<include name="*.*"></include>
 			</fileset>
 		</copy>
 		<!-- 拷贝tiles文件 -->
-		<copy todir="${output.dir}/source/main/resources/tiles">
+		<copy todir="${output.dir}/source/main/resources/tiles" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src/template/source/main/resources/tiles">
 				<include name="tiles-manager-defs-template.xml"></include>
 			</fileset>
 		</copy>
 		<!-- 拷贝jsp文件 -->
-		<copy todir="${output.dir}/source/main/webapp/jsp">
+		<copy todir="${output.dir}/source/main/webapp/jsp" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src/template/source/main/webapp/jsp">
 				<include name="*.jsp"></include>
 			</fileset>
 		</copy>
 		<!-- 拷贝js文件 -->
-		<copy todir="${output.dir}/source/main/webapp/js">
+		<copy todir="${output.dir}/source/main/webapp/js" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src/template/source/main/webapp/js">
 				<include name="*.js"></include>
 			</fileset>
 		</copy>
 		<!-- 拷贝css文件 -->
-		<copy todir="${output.dir}/source/main/webapp/css">
+		<copy todir="${output.dir}/source/main/webapp/css" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src/template/source/main/webapp/css">
 				<include name="*.css"></include>
 			</fileset>
 		</copy>
 
 		<!-- 处理java,tiles,xml,jsp,js,css文件 -->
-		<replace dir="${output.dir}/source" encoding="UTF-8">
+		<replace dir="${output.dir}/source" encoding="UTF-8" >
 			<include name="**/**/*.*"></include>
 			<replacefilter token="@component.name@" value="${component.name}"></replacefilter>
 			<replacefilter token="@entity.name@" value="${entity.name}"></replacefilter>
@@ -355,27 +354,27 @@
 		</replace>
 
 		<!-- 移动java文件 -->
-		<move file="${output.dir}/source/main/java/Example.java" tofile="${component.path}/entity/${entity.name}.java"></move>
+		<move file="${output.dir}/source/main/java/Example.java" tofile="${component.path}/entity/${entity.name}.java" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/java/ExampleRepository.java"
-			tofile="${component.path}/repository/${entity.name}Repository.java"></move>
+			tofile="${component.path}/repository/${entity.name}Repository.java"  encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/java/ExampleService.java"
-			tofile="${component.path}/service/${entity.name}Service.java"></move>
+			tofile="${component.path}/service/${entity.name}Service.java" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/java/ExampleServiceImpl.java"
-			tofile="${component.path}/service/impl/${entity.name}ServiceImpl.java"></move>
+			tofile="${component.path}/service/impl/${entity.name}ServiceImpl.java" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/java/ExampleController.java"
-			tofile="${component.path}/controller/${entity.name}Controller.java"></move>
+			tofile="${component.path}/controller/${entity.name}Controller.java" encoding="UTF-8"></move>
 		<!-- 移动测试类 -->
 		<move file="${output.dir}/source/test/java/ExampleRepositoryTestCase.java"
-			tofile="${basedir}/src/test/java/${package.path}/test/component/${component.name}/repository/${entity.name}RepositoryTestCase.java"></move>
+			tofile="${basedir}/src/test/java/${package.path}/test/component/${component.name}/repository/${entity.name}RepositoryTestCase.java" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/test/java/ExampleServiceTestCase.java"
-			tofile="${basedir}/src/test/java/${package.path}/test/component/${component.name}/service/${entity.name}ServiceTestCase.java"></move>
+			tofile="${basedir}/src/test/java/${package.path}/test/component/${component.name}/service/${entity.name}ServiceTestCase.java" encoding="UTF-8"></move>
 
 		<!-- 移动properties文件 -->
 		<native2ascii encoding="UTF-8"
 			src="${output.dir}/source/main/resources/i18n" includes="Entity_zh_CN.source"
 			dest="${basedir}/src/main/resources/i18n"></native2ascii>
 		<move file="${basedir}/src/main/resources/i18n/Entity_zh_CN.source"
-			tofile="${basedir}/src/main/resources/i18n/${entity.config.name}_zh_CN.properties"></move>
+			tofile="${basedir}/src/main/resources/i18n/${entity.config.name}_zh_CN.properties" encoding="UTF-8"></move>
 
 		<!-- 将资源文件配置到applicationContext-web.xml -->
 		<loadfile property="i18n-config"
@@ -390,20 +389,20 @@
 		<!-- 移动tiles文件（manager) -->
 		<move
 			file="${output.dir}/source/main/resources/tiles/tiles-manager-defs-template.xml"
-			tofile="${basedir}/src/main/resources/tiles/manager/tiles-manager-${entity.config.name}-defs.xml"></move>
+			tofile="${basedir}/src/main/resources/tiles/manager/tiles-manager-${entity.config.name}-defs.xml" encoding="UTF-8"></move>
 		<!-- 移动jsp文件 -->
 		<move file="${output.dir}/source/main/webapp/jsp/Entity_update.jsp"
-			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_update.jsp"></move>
+			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_update.jsp" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/webapp/jsp/Entity_detail.jsp"
-			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_detail.jsp"></move>
+			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_detail.jsp" encoding="UTF-8"></move>
 		<move file="${output.dir}/source/main/webapp/jsp/Entity_center.jsp"
-			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_center.jsp"></move>
+			tofile="${basedir}/src/main/webapp/component/${component.name}/${entity.config.name}/${entity.config.name}_center.jsp" encoding="UTF-8"></move>
 		<!-- 移动js文件 -->
 		<move file="${output.dir}/source/main/webapp/js/Entity.js"
-			tofile="${basedir}/src/main/webapp/js/component/${component.name}/${entity.config.name}/${entity.config.name}.js"></move>
+			tofile="${basedir}/src/main/webapp/js/component/${component.name}/${entity.config.name}/${entity.config.name}.js" encoding="UTF-8"></move>
 		<!-- 移动css文件 -->
 		<move file="${output.dir}/source/main/webapp/css/Entity.css"
-			tofile="${basedir}/src/main/webapp/css/component/${component.name}/${entity.config.name}/${entity.config.name}.css"></move>
+			tofile="${basedir}/src/main/webapp/css/component/${component.name}/${entity.config.name}/${entity.config.name}.css" encoding="UTF-8"></move>
 		<!-- 生成管理菜单 -->
 		<loadfile property="entity.manager.menu.jsp.source"
 			srcFile="${output.dir}/source/main/webapp/jsp/Entity_manager_list_group_item.jsp"
@@ -503,17 +502,17 @@
 		</if>
 		<property name="component.path"
 			value="${basedir}/src/main/java/${package.path}/component/${component.name}"></property>
-		<copy todir="${output.dir}/source/main/java">
+		<copy todir="${output.dir}/source/main/java" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src/template/source/main/java">
 				<include name="EntityMethod.java"></include>
 			</fileset>
 		</copy>
-		<copy todir="${output.dir}/source/main/resources/i18n">
-			<fileset dir="${basedir}/src/template/source/main/resources/i18n">
+		<copy todir="${output.dir}/source/main/resources/i18n" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${basedir}/src/template/source/main/resources/i18n" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 				<include name="Entity_property_i18n.properties"></include>
 			</fileset>
 		</copy>
-		<copy todir="${output.dir}/source/main/resources/i18n">
+		<copy todir="${output.dir}/source/main/resources/i18n" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src//main/resources/i18n">
 				<include name="${entity.config.name}_zh_CN.properties"></include>
 			</fileset>
@@ -639,17 +638,18 @@
 		<antcall target="clean-generate-path"></antcall>
 		<delete dir="${basedir}/src/template/project/src"></delete>
 		<mkdir dir="${output.dir}/project/src"></mkdir>
-		<copy todir="${output.dir}/project/src">
+		<copy todir="${output.dir}/project/src" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src">
 				<include name="**/**/*.*"></include>
 			</fileset>
 		</copy>
-		<copy todir="${output.dir}/project">
+		<copy todir="${output.dir}/project" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}">
 				<include name="*.xml"></include>
 			</fileset>
 		</copy>
-		<copy todir="${basedir}/src/template/project">
+		
+		<copy todir="${basedir}/src/template/project" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${output.dir}/project">
 				<include name="**/**/**.*"></include>
 			</fileset>
