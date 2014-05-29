@@ -508,7 +508,7 @@
 			</fileset>
 		</copy>
 		<copy todir="${output.dir}/source/main/resources/i18n" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
-			<fileset dir="${basedir}/src/template/source/main/resources/i18n" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${basedir}/src/template/source/main/resources/i18n">
 				<include name="Entity_property_i18n.properties"></include>
 			</fileset>
 		</copy>
