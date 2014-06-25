@@ -20,6 +20,8 @@ body {
 </style>
 </head>
 <body>
-Hello
+<%Exception ex=(Exception)request.getAttribute("exception");%>
+<H2>Exception:</H2>
+<%ex.printStackTrace(new PrintWriter(out));%>
 </body>
 </html>

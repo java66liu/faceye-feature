@@ -23,6 +23,7 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import com.faceye.feature.repository.BaseRepository;
+import com.faceye.feature.repository.DynamicSQLBuilder;
 import com.faceye.feature.repository.DynamicSpecifications;
 import com.faceye.feature.repository.SearchFilter;
 
@@ -35,7 +36,6 @@ import com.faceye.feature.repository.SearchFilter;
  * @param <ID>
  */
 @NoRepositoryBean
-// @Repository
 public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseRepository<T, ID> {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
@@ -73,10 +73,15 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 		return result;
 	}
 
-	public Page<?> getPage(String sql, String resultSetMapping, int page, int size) {
+	public Page<?> getPage(Map<String,Object> params,String sql, String resultSetMapping, int page, int size) {
 		Page<?> result = null;
 		String countSQL = "";
 		Pageable pageable = null;
+		logger.debug(">>Before Builder,SQL is:"+sql);
+		//根据查询条件构造SQL
+		Map<String,SearchFilter> filters=SearchFilter.parse(params);
+		sql=DynamicSQLBuilder.builder(filters, sql);
+		logger.debug(">>After Build,SQL is:"+sql);
 		Query query = this.entityManager.createNativeQuery(sql, resultSetMapping);
 		// 如果sie=0，则默认查询全部，如果size!=0,则进行分页
 		if (size != 0) {
@@ -91,6 +96,7 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 		BigInteger count = null;
 		// 进行分页查询
 		if (StringUtils.isNotEmpty(countSQL)) {
+			logger.debug(">>Count SQL is:"+countSQL);
 			Object singleObject = this.entityManager.createNativeQuery(countSQL).getSingleResult();
 			count = (BigInteger) singleObject;
 		}
@@ -104,35 +110,7 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 		return result;
 	}
 
-	@Override
-	public Page<?> getPage(String sql, Class resultClass, int page, int size) {
-		Page<?> result = null;
-		Pageable pageable = null;
-		String countSQL = "";
-		Query query = this.entityManager.createNativeQuery(sql, resultClass);
-		if (size != 0) {
-			query.setFirstResult((page - 1) * size);
-			query.setMaxResults(size);
-			countSQL = this.buildCountSQL(sql);
-		} else {
-			query.setFirstResult(0);
-		}
-		List items = query.getResultList();
-		BigInteger count = null;
-		// 进行分页查询
-		if (StringUtils.isNotEmpty(countSQL)) {
-			Object singleObject = this.entityManager.createNativeQuery(countSQL).getSingleResult();
-			count = (BigInteger) singleObject;
-		}
-		int total = 0;
-		if (count != null) {
-			total = count.intValue();
-		} else {
-			total = items.size();
-		}
-		result = new PageImpl(items, pageable, total);
-		return result;
-	}
+	
 
 	
 

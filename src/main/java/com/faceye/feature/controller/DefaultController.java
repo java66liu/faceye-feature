@@ -17,4 +17,8 @@ public class DefaultController {
 	public String index(){
 		return "default.manager";
 	}
+	
+	public String error(){
+		return "";
+	}
 }

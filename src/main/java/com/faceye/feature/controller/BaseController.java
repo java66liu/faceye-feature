@@ -16,7 +16,7 @@ import com.faceye.feature.service.BaseService;
  * @param <ID>
  * @param <S>
  */
-public class BaseController<T, ID extends Serializable, S extends BaseService<T, ID>> {
+abstract public class BaseController<T, ID extends Serializable, S extends BaseService<T, ID>> {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	protected S service = null;

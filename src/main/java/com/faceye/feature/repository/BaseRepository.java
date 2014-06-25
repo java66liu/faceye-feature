@@ -10,7 +10,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 @NoRepositoryBean
 public interface BaseRepository <T, ID extends Serializable> extends JpaRepository<T,ID>,JpaSpecificationExecutor<T>{
 	/**
-	 * 增加通用分页查询
+	 * 增加JPA通用分页查询
 	 * @todo
 	 * @param searchParams
 	 * @param page
@@ -24,8 +24,9 @@ public interface BaseRepository <T, ID extends Serializable> extends JpaReposito
 	
 	
 	/**
-	 * 
+	 * 使用SQL进行查询
 	 * @todo
+	 * @param params,查询参数的封装
 	 * @param sql
 	 * @param page
 	 * @param size
@@ -34,9 +35,8 @@ public interface BaseRepository <T, ID extends Serializable> extends JpaReposito
 	 * haipenge@gmail.com
 	 * 2014年6月24日
 	 */
-	public Page<?> getPage(String sql,String resultSetMapping,int page,int size);
+	public Page<?> getPage(Map<String,Object> params,String sql,String resultSetMapping,int page,int size);
 	
 	
-	public Page<?> getPage(String sql,Class resultClass,int page,int size);
 	
 }

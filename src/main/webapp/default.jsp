@@ -35,8 +35,8 @@ body {
 ==============
           
       开始之前：
-      1.配置${ANT_HOME},${M2_HOME}
-      2.下载ant-contrib 放置至:${ANT_HOME}/lib
+      1.配置ANT_HOME,M2_HOME
+      2.下载ant-contrib 放置至:ANT_HOME/lib
       
       FaceYe 项目自助化工具
       解决问题:解决项目初期搭建调试与集成耗时现像
