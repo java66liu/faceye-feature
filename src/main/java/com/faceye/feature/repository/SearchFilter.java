@@ -8,6 +8,7 @@ package com.faceye.feature.repository;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Maps;
@@ -33,6 +34,9 @@ public class SearchFilter {
 	 */
 	public static Map<String, SearchFilter> parse(Map<String, Object> searchParams) {
 		Map<String, SearchFilter> filters = Maps.newHashMap();
+		if(MapUtils.isEmpty(searchParams)){
+			return filters;
+		}
 		for (Entry<String, Object> entry : searchParams.entrySet()) {
 			// 过滤掉空值
 			String key = entry.getKey();
