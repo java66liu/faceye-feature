@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import com.faceye.feature.repository.BaseRepository;
 import com.faceye.feature.repository.DynamicSQLBuilder;
 import com.faceye.feature.repository.DynamicSpecifications;
+import com.faceye.feature.repository.SQLBuilderEntity;
 import com.faceye.feature.repository.SearchFilter;
 
 /**
@@ -73,16 +75,22 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 		return result;
 	}
 
-	public Page<?> getPage(Map<String,Object> params,String sql, String resultSetMapping, int page, int size) {
+	/**
+	 * 使用SQL进行数据查询
+	 */
+	public Page<?> getPage(Map<String, Object> params, String sql, String resultSetMapping, int page, int size) {
 		Page<?> result = null;
 		String countSQL = "";
 		Pageable pageable = null;
-		logger.debug(">>Before Builder,SQL is:"+sql);
-		//根据查询条件构造SQL
-		Map<String,SearchFilter> filters=SearchFilter.parse(params);
-		sql=DynamicSQLBuilder.builder(filters, sql);
-		logger.debug(">>After Build,SQL is:"+sql);
+		logger.debug(">>Before Builder,SQL is:" + sql);
+		// 根据查询条件构造SQL
+		Map<String, SearchFilter> filters = SearchFilter.parse(params);
+		SQLBuilderEntity builderEntity = DynamicSQLBuilder.builder(filters, sql);
+		// 防止注入攻击
+		sql = builderEntity.getSql();
+		logger.debug(">>After Build,SQL is:" + sql);
 		Query query = this.entityManager.createNativeQuery(sql, resultSetMapping);
+	    this.wrapperQuery(query, builderEntity);
 		// 如果sie=0，则默认查询全部，如果size!=0,则进行分页
 		if (size != 0) {
 			query.setFirstResult((page - 1) * size);
@@ -96,8 +104,10 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 		BigInteger count = null;
 		// 进行分页查询
 		if (StringUtils.isNotEmpty(countSQL)) {
-			logger.debug(">>Count SQL is:"+countSQL);
-			Object singleObject = this.entityManager.createNativeQuery(countSQL).getSingleResult();
+			logger.debug(">>Count SQL is:" + countSQL);
+			Query countQuery = this.entityManager.createNativeQuery(countSQL);
+			this.wrapperQuery(countQuery, builderEntity);
+			Object singleObject = countQuery.getSingleResult();
 			count = (BigInteger) singleObject;
 		}
 		int total = 0;
@@ -110,9 +120,27 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 		return result;
 	}
 
-	
-
-	
+	/**
+	 * 将SQL中的参数与值进行包装
+	 * @todo
+	 * @param query
+	 * @param builderEntity
+	 * @return
+	 * @author:@haipenge
+	 * haipenge@gmail.com
+	 * 2014年6月26日
+	 */
+	private void wrapperQuery(Query query, SQLBuilderEntity builderEntity) {
+		if (query != null && builderEntity != null) {
+			List<Object> paramValues = builderEntity.getParamValues();
+			if (CollectionUtils.isNotEmpty(paramValues)) {
+				for (int i = 0; i < paramValues.size(); i++) {
+					Object value = paramValues.get(i);
+					query.setParameter(i+1, value);
+				}
+			}
+		}
+	}
 
 	/**
 	 * 构造查询总量的SQL
