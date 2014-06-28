@@ -57,14 +57,15 @@ public class PageTag extends SimpleTagSupport {
 			// int startIndex = page.get
 			// int pageSize = page.getPageSize().intValue();
 			long totalCount = page.getTotalElements();
-			int size=page.getSize();
-			
+			int size = page.getSize();
+
 			// int nextIndex = page.getNextIndex().intValue();
 			// int previousIndex = page.getPreviousIndex().intValue();
 			int totalPage = page.getTotalPages();
 			// 0,1,2,3...
 			int currentPage = page.getNumber();
-			int start = 0;
+			currentPage=currentPage+1;
+			int start = 1;
 			int end = totalPage;
 			// sb.append("<div class=\"default-page-container\">");
 			sb.append("<ul class=\"pagination\">");
@@ -76,39 +77,40 @@ public class PageTag extends SimpleTagSupport {
 			}
 			String url = "";
 			if (currentPage >= 5) {
-				url = this.recombineUrl(0 , size);
+				url = this.recombineUrl(1, size);
 				// sb.append("<span class=\"blue\"><a href=\"" + url + "\">1</a></span>");
+//				sb.append(" <li><a href=\"" + url + "\">&laquo;</a></li>");
 				sb.append(" <li><a href=\"" + url + "\">1</a></li>");
 				if (currentPage >= 6) {
 					// sb.append("<span class=\"force-font-size-11\">...</span>");
 					sb.append(" <li><a>...</a></li>");
 				}
 			} else {
-				if (currentPage > 0) {
-					url = this.recombineUrl(currentPage, size);
+				if (currentPage > 1) {
+					url = this.recombineUrl(1, size);
 					// sb.append("<span class=\"force-font-size-11\"><a href=\"" + url
 					// + "\" class=\"yellowgreen\" style=\"font-size:normal;\">&lt;&lt;</a></span>");
 					sb.append(" <li><a href=\"" + url + "\">&laquo;</a></li>");
 				}
 			}
 
-			for (int i = start; i < end; i++) {
+			for (int i = start; i <= end; i++) {
 				url = "";
 				if (i == currentPage) {
 					// focus-bg
 					// sb.append("<span class=\"focus-bg\">");
 					// sb.append(i + 1);
 					// sb.append("</span>");
-					sb.append(" <li class=\"active\"><a href=\"#\">" + (i + 1) + "<span class=\"sr-only\">(current)</span></a></li>");
+					sb.append(" <li class=\"active\"><a href=\"#\">" + (i) + "<span class=\"sr-only\">(current)</span></a></li>");
 				} else {
-					url += this.recombineUrl(i , size);
+					url += this.recombineUrl(i, size);
 					// sb.append("<span><a href=\"");
 					// sb.append(url);
 					// sb.append("\" class=\"blue\">");
 					// sb.append(i + 1);
 					// sb.append("</a></span>");
 
-					sb.append(" <li><a href=\"" + url + "\">" + (i + 1) + "</a></li>");
+					sb.append(" <li><a href=\"" + url + "\">" + (i) + "</a></li>");
 				}
 			}
 			// 显示最后一页
@@ -120,8 +122,8 @@ public class PageTag extends SimpleTagSupport {
 				sb.append(" <li><a href=\"" + url + "\">" + totalPage + "</a></li>");
 			}
 
-			if (currentPage < totalPage - 1) {
-				url = this.recombineUrl(currentPage, size);
+			if (currentPage < totalPage ) {
+				url = this.recombineUrl(totalPage, size);
 				// sb.append("<span class=\"force-font-size-11\"><a href=\"" + url
 				// + "\" class=\"yellowgreen\"  style=\"font-size:normal;\">&gt;&gt;</a></span>");
 				sb.append(" <li><a href=\"" + url + "\">&raquo;</a></li>");
@@ -156,13 +158,16 @@ public class PageTag extends SimpleTagSupport {
 		if (null == map) {
 			map = new HashMap();
 		}
-		map.put("page", null);
-		map.put("size", null);
+		map.put("page", pageNumber);
+		if (size != 0) {
+			map.put("size", size);
+		}
 
 		if (MapUtils.isNotEmpty(map)) {
 			if (!resultUrl.endsWith("?") && !resultUrl.contains("&")) {
 				resultUrl += "?";
 			}
+
 			Iterator it = map.keySet().iterator();
 			while (it.hasNext()) {
 				String key = it.next().toString();

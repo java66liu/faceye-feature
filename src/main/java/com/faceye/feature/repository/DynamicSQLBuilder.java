@@ -29,7 +29,12 @@ public class DynamicSQLBuilder {
 		StringBuilder res = new StringBuilder(sql);
 		SQLBuilderEntity entity=new SQLBuilderEntity();
 		List<Object> paramValues=new ArrayList<Object>();
-		res=addWhere2SQL(res);
+		//将Order by 从SQL语句中隔离出来
+	    String temp=res.toString();
+	    int orderIndex=temp.toLowerCase().lastIndexOf("order");
+	    String orderBy=sql.substring(orderIndex);
+	    String sqlBody=sql.substring(0, orderIndex);
+		res=addWhere2SQL(new StringBuilder(sqlBody));
 		if (MapUtils.isNotEmpty(filters)) {
 			Iterator<SearchFilter> it = filters.values().iterator();
 			while (it.hasNext()) {
@@ -95,6 +100,8 @@ public class DynamicSQLBuilder {
 				}
 			}
 		}
+		res.append(" ");
+		res.append(orderBy);
 		entity.setSql(res.toString());
 		entity.setParamValues(paramValues);
 		return entity;

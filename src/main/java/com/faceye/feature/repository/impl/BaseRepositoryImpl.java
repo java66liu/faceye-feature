@@ -66,7 +66,8 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
 		specification = DynamicSpecifications.bySearchFilter(filters.values(), clazz);
 		if (size != 0) {
-			Pageable pageable = new PageRequest(page, size);
+			//前端页码从1开始，分页代码:从0开始
+			Pageable pageable = new PageRequest(page-1, size);
 			result = findAll(specification, pageable);
 		} else {
 			List<T> items = findAll(specification);
@@ -80,44 +81,52 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 	 */
 	public Page<?> getPage(Map<String, Object> params, String sql, String resultSetMapping, int page, int size) {
 		Page<?> result = null;
-		String countSQL = "";
 		Pageable pageable = null;
 		logger.debug(">>Before Builder,SQL is:" + sql);
 		// 根据查询条件构造SQL
 		Map<String, SearchFilter> filters = SearchFilter.parse(params);
 		SQLBuilderEntity builderEntity = DynamicSQLBuilder.builder(filters, sql);
 		// 防止注入攻击
-		sql = builderEntity.getSql();
+		String realSQL = builderEntity.getSql();
 		logger.debug(">>After Build,SQL is:" + sql);
-		Query query = this.entityManager.createNativeQuery(sql, resultSetMapping);
-	    this.wrapperQuery(query, builderEntity);
+		Query query = this.entityManager.createNativeQuery(realSQL, resultSetMapping);
+		this.wrapperQuery(query, builderEntity);
 		// 如果sie=0，则默认查询全部，如果size!=0,则进行分页
 		if (size != 0) {
 			query.setFirstResult((page - 1) * size);
 			query.setMaxResults(size);
-			countSQL = this.buildCountSQL(sql);
 			pageable = new PageRequest(page, size);
 		} else {
 			query.setFirstResult(0);
 		}
 		List items = query.getResultList();
-		BigInteger count = null;
 		// 进行分页查询
-		if (StringUtils.isNotEmpty(countSQL)) {
-			logger.debug(">>Count SQL is:" + countSQL);
-			Query countQuery = this.entityManager.createNativeQuery(countSQL);
-			this.wrapperQuery(countQuery, builderEntity);
-			Object singleObject = countQuery.getSingleResult();
-			count = (BigInteger) singleObject;
-		}
-		int total = 0;
-		if (count != null) {
-			total = count.intValue();
+		long count = 0;
+		if (size != 0) {
+			count = this.getCount(params, sql);
 		} else {
-			total = items.size();
+			count = items.size();
 		}
-		result = new PageImpl(items, pageable, total);
+		result = new PageImpl(items, pageable, count);
 		return result;
+	}
+
+	/**
+	 * 查询记录总数
+	 */
+	@Override
+	public long getCount(Map<String, Object> params, String sql) {
+		long count = 0;
+		Map<String, SearchFilter> filters = SearchFilter.parse(params);
+		SQLBuilderEntity builderEntity = DynamicSQLBuilder.builder(filters, sql);
+		// 防止注入攻击
+		sql = builderEntity.getSql();
+		String countSQL = this.buildCountSQL(sql);
+		Query countQuery = this.entityManager.createNativeQuery(countSQL);
+		this.wrapperQuery(countQuery, builderEntity);
+		Object singleObject = countQuery.getSingleResult();
+		count = ((BigInteger) singleObject).longValue();
+		return count;
 	}
 
 	/**
@@ -136,7 +145,7 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 			if (CollectionUtils.isNotEmpty(paramValues)) {
 				for (int i = 0; i < paramValues.size(); i++) {
 					Object value = paramValues.get(i);
-					query.setParameter(i+1, value);
+					query.setParameter(i + 1, value);
 				}
 			}
 		}
@@ -184,4 +193,5 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 		m.appendTail(sb);
 		return sb.toString();
 	}
+
 }

@@ -37,6 +37,16 @@ public interface BaseRepository <T, ID extends Serializable> extends JpaReposito
 	 */
 	public Page<?> getPage(Map<String,Object> params,String sql,String resultSetMapping,int page,int size);
 	
-	
+	/**
+	 * 查询总数
+	 * @todo
+	 * @param params
+	 * @param sql
+	 * @return
+	 * @author:@haipenge
+	 * haipenge@gmail.com
+	 * 2014年6月26日
+	 */
+	public long getCount(Map<String,Object> params,String sql);
 	
 }
