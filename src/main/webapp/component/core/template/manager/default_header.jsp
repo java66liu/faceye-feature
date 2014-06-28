@@ -32,10 +32,10 @@
 					<input type="password" name="j_password" placeholder="Password" class="form-control">
 				</div>
 				<button type="submit" class="btn btn-success">
-					<s:text name="faceye.security.login" />
+					<fmt:message key="security.user.login" ></fmt:message>
 				</button>
-				<a href="<c:url value="/security/userAction!register.do"/>" class="btn btn-warning" role="button"><s:text
-						name="faceye.security.register" /></a>
+				<a href="<c:url value="/register"/>" class="btn btn-warning" role="button">
+				<fmt:message key="security.user.register"></fmt:message></a>
 			</form>
 		</c:when>
 		<c:otherwise>
@@ -46,8 +46,8 @@
 				&nbsp;&nbsp; <a href="<c:url value="/security/defaultManagerAction!home.do"/>"><s:text name="faceye.security" /></a>  -->
 				<a href="<c:url value="/nms/nmsHomeAction!manage.do"/>"><s:text name="faceye.global.manager"/></a>&nbsp;&nbsp;
 				<a
-					href="<c:url value="/j_spring_security_logout"/>"><s:text
-						name="faceye.security.logout" /></a>
+					href="<c:url value="/j_spring_security_logout"/>"><fmt:message
+						key="security.user.logout"></fmt:message></a>
 			</p>
 		</c:otherwise>
 	</c:choose>

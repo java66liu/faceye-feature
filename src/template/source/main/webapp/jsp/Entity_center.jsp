@@ -29,12 +29,12 @@
 						<!--@generate-entity-jsp-property-value@-->
 						<td>
 						   <a href="<c:url value="/@component.name@/@entity.config.name@/edit/${@entity.config.name@.id}"/>">
-						     <fmt:message key="@component.name@.@entity.config.name@.edit"></fmt:message>
+						     <fmt:message key="global.edit"></fmt:message>
 						   </a>
 						 </td>
 						<td>
 						   <a href="<c:url value="/@component.name@/@entity.config.name@/remove/${@entity.config.name@.id}"/>">
-						       <fmt:message key="@component.name@.@entity.config.name@.remove"></fmt:message>
+						       <fmt:message key="global.remove"></fmt:message>
 						   </a>
 						</td>
 					<tr>

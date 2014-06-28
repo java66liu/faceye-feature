@@ -24,4 +24,5 @@
 	<import resource="classpath*:/conf/applicationContext-cache.xml" />
 	<import resource="classpath*:/conf/applicationContext-config.xml" />
 	<import resource="classpath*:/conf/applicationContext-init.xml" />
+	<import resource="classpath*:/conf/applicationContext-security.xml" />
 </beans>

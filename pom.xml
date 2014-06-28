@@ -41,6 +41,7 @@
 		<java.el-api.version>3.0.0</java.el-api.version>
 		<jedis.version>2.4.2</jedis.version>
 		<standard.version>1.1.2</standard.version>
+		<aspectj.version>1.7.4</aspectj.version>
 	</properties>
 	<prerequisites>
 		<maven>3.0.0</maven>
@@ -379,6 +380,14 @@
 			<version>${jedis.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -399,7 +408,7 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.version}</version>
 				<configuration>
-					<scanIntervalSeconds>15</scanIntervalSeconds>
+					<scanIntervalSeconds>15000000</scanIntervalSeconds>
 					<webApp>
 						<contextPath>/</contextPath>
 						<defaultsDescriptor>src/main/resources/webdefault.xml</defaultsDescriptor>
@@ -413,7 +422,7 @@
 		</plugins>
 	</build>
 	<profiles>
-		
+
 		<profile>
 			<id>dev</id>
 			<activation>
