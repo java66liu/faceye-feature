@@ -3,7 +3,7 @@
 	<div class="col-md-3">
 		<tiles:insertAttribute name="default-center-left"></tiles:insertAttribute>
 	</div>
-	<div class="col-md-9">
+	<div class="col-md-9" id="default-center-right">
 		<tiles:insertAttribute name="default-center-right"></tiles:insertAttribute>
 	</div>
 </div>

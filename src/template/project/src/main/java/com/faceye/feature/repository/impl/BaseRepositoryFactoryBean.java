@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
-import org.springframework.data.jpa.repository.support.LockModeRepositoryPostProcessor;
 import org.springframework.data.jpa.repository.support.QueryDslJpaRepository;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
@@ -25,28 +24,28 @@ public class BaseRepositoryFactoryBean<R extends JpaRepository<T, ID>, T, ID ext
 		return new BaseRepositoryFactory(entityManager);
 	}
 
-	private static  class BaseRepositoryFactory extends JpaRepositoryFactory {
-		private EntityManager entityManager=null;
-		private  LockModeRepositoryPostProcessor lockModePostProcessor=null;
+	private static class BaseRepositoryFactory extends JpaRepositoryFactory {
+		private final EntityManager entityManager;
+
 		public BaseRepositoryFactory(EntityManager entityManager) {
 			super(entityManager);
-			this.entityManager=entityManager;
-			this.lockModePostProcessor = LockModeRepositoryPostProcessor.INSTANCE;
-			addRepositoryProxyPostProcessor(lockModePostProcessor);
+			this.entityManager = entityManager;
+
 		}
 
-		@SuppressWarnings("unchecked")
-		protected Object  getTargetRepository(RepositoryMetadata metadata) {
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		protected <T, ID extends Serializable> SimpleJpaRepository<?, ?> getTargetRepository(RepositoryMetadata metadata,
+				EntityManager entityManager) {
 			Class<?> repositoryInterface = metadata.getRepositoryInterface();
 			JpaEntityInformation<?, Serializable> entityInformation = getEntityInformation(metadata.getDomainType());
-		    SimpleJpaRepository<?, ?> repo=null;
-			Boolean isQueryDslExecutor=isQueryDslExecutor(repositoryInterface);
-			if(isQueryDslExecutor){
-				repo= new QueryDslJpaRepository(entityInformation, entityManager);
-			}else{
-				repo=new BaseRepositoryImpl(entityInformation, entityManager);
+
+			SimpleJpaRepository<?, ?> repo = null;
+			Boolean isQueryDslExecutor = isQueryDslExecutor(repositoryInterface);
+			if (isQueryDslExecutor) {
+				repo = new QueryDslJpaRepository(entityInformation, entityManager);
+			} else {
+				repo = new BaseRepositoryImpl(entityInformation, entityManager);
 			}
-			repo.setLockMetadataProvider(lockModePostProcessor.getLockMetadataProvider());
 			return repo;
 		}
 
@@ -57,8 +56,8 @@ public class BaseRepositoryFactoryBean<R extends JpaRepository<T, ID>, T, ID ext
 				return BaseRepository.class;
 			}
 		}
-		private boolean isQueryDslExecutor(Class<?> repositoryInterface) {
 
+		private boolean isQueryDslExecutor(Class<?> repositoryInterface) {
 			return QUERY_DSL_PRESENT && QueryDslPredicateExecutor.class.isAssignableFrom(repositoryInterface);
 		}
 	}

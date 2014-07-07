@@ -1,6 +1,7 @@
 package com.faceye.component.security.service.impl;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -18,6 +19,7 @@ import com.faceye.component.security.repository.ResourceRepository;
 import com.faceye.component.security.service.ResourceService;
 import com.faceye.component.security.service.RoleService;
 import com.faceye.feature.service.impl.BaseServiceImpl;
+import com.faceye.feature.util.ServiceException;
 
 @Service
 public class ResourceServiceImpl extends BaseServiceImpl<Resource, Long, ResourceRepository> implements ResourceService,FilterInvocationSecurityMetadataSource {
@@ -28,6 +30,17 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, Long, Resourc
 	@Autowired
 	public ResourceServiceImpl(ResourceRepository dao) {
 		super(dao);
+	}
+	
+	@Override
+	public void remove(Long id) throws ServiceException {
+		Resource resource=this.get(id);
+		this.remove(resource);
+	}
+
+	@Override
+	public void remove(Resource entity) throws ServiceException {
+		dao.delete(entity);
 	}
 
 	@Override
@@ -59,6 +72,11 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource, Long, Resourc
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return true;
+	}
+
+	@Override
+	public Resource getResourceByUrl(String url) {
+		return this.dao.getResourceByUrl(url);
 	}
 	
 	

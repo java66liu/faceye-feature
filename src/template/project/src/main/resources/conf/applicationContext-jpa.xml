@@ -75,6 +75,8 @@
 		factory-class="com.faceye.feature.repository.impl.BaseRepositoryFactoryBean"
 		repository-impl-postfix="Impl">
 	</jpa:repositories>
+	
+
 
 
 	<bean

@@ -508,7 +508,7 @@
 			</fileset>
 		</copy>
 		<copy todir="${output.dir}/source/main/resources/i18n" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
-			<fileset dir="${basedir}/src/template/source/main/resources/i18n" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${basedir}/src/template/source/main/resources/i18n">
 				<include name="Entity_property_i18n.properties"></include>
 			</fileset>
 		</copy>
@@ -651,8 +651,18 @@
 		
 		<copy todir="${basedir}/src/template/project" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${output.dir}/project">
-				<include name="**/**/**.*"></include>
+				<exclude name="**/**/*Example*.*"></exclude>
+				<exclude name="**/**/*example*.*"></exclude>
 			</fileset>
 		</copy>
+	</target>
+	<!-- 升级指定模块 -->
+	<target name="update-component">
+	    <input name="输入项目根目录" addProperty="update.dir"/>
+	    <copy todir="${update.dir}" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
+	        <fileset dir="${basedir}">
+	            <include name="**/**/**.*"></include>
+	        </fileset>
+	    </copy>
 	</target>
 </project>

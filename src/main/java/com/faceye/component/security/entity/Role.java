@@ -95,6 +95,19 @@ public class Role implements Serializable {
 	public String getRoleAuth() {
 		return "ROLE_" + id;
 	}
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinTable(name = "security_menu_role", joinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "menu_id", referencedColumnName = "id") })
+	private Set<Menu> menus=new HashSet<Menu>(0);
+
+	public Set<Menu> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(Set<Menu> menus) {
+		this.menus = menus;
+	}
+	
+	
 }
 /**@generate-entity-source@**/
 

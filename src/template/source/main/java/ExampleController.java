@@ -40,9 +40,7 @@ public class @entity.name@Controller extends BaseController<@entity.name@, Long,
 	@RequestMapping("/home")
 	public String home(HttpServletRequest request, Model model) {
 		Map searchParams=HttpUtil.getRequestParams(request);
-		int pageNum=0;
-		int size=20;
-		Page<@entity.name@> page = this.service.getPage(searchParams, pageNum, size);
+		Page<@entity.name@> page = this.service.getPage(searchParams, getPage(searchParams), getSize(searchParams));
 		model.addAttribute("page", page);
 		return "@component.name@.@entity.config.name@.manager";
 	}

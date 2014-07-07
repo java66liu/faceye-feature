@@ -37,4 +37,7 @@ public interface UserRepository extends BaseRepository<User,Long> {
 	 */
 	public User getUserByEmail(String email);
 	
+	
+	
+	
 }/**@generate-repository-source@**/

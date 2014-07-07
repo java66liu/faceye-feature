@@ -7,5 +7,6 @@ import com.faceye.feature.service.BaseService;
 
 public interface ResourceService extends BaseService<Resource,Long>{
 
+	public Resource getResourceByUrl(String url);
 	
 }/**@generate-service-source@**/

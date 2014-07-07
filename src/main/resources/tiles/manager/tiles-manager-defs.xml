@@ -19,4 +19,13 @@
 	<definition name="default.msg.center" extends="default.center">
 	    <put-attribute name="default-center" value="/component/core/msg/default.jsp"></put-attribute>
 	</definition>
+
+	<!-- 默认空白页面 -->
+	<definition name="default.blank" template="/component/core/template/manager/default_blank_template.jsp">
+	    <put-attribute name="default-center" value="/component/core/template/manager/default_blank_center.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="default.error" extends="default.blank">
+	    <put-attribute name="default-center" value="/component/core/error/default.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

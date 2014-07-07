@@ -79,11 +79,12 @@
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		<bean class="com.faceye.component.security.interceptor.MenuHandlerInterceptor"></bean>
 	</mvc:interceptors>
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
 
-	<mvc:view-controller path="/component/core/error/default.jsp" view-name="/error" />
+	<mvc:view-controller path="/error" view-name="default.error" />
 
 	<!-- 总错误处理 -->
 	<bean id="exceptionResolver"
@@ -132,7 +133,6 @@
 				<bean
 					class="org.springframework.http.converter.StringHttpMessageConverter">
 					<property name="writeAcceptCharset" value="false" />
-
 					<property name="supportedMediaTypes">
 						<list>
 							<value>text/plain;charset=UTF-8</value>
@@ -182,7 +182,8 @@
 				<value>/i18n/user</value>
 				<value>/i18n/role</value>
 				<value>/i18n/resource</value>
-				<!--i18n-config -->
+				<value>/i18n/menu</value>
+<!--i18n-config -->
 			</list>
 		</property>
 	</bean>

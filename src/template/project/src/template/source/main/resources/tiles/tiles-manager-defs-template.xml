@@ -19,7 +19,7 @@
 	    <put-attribute name="default-center-right" value="/component/@component.name@/@entity.config.name@/@entity.config.name@_update.jsp"></put-attribute>
 	</definition>
 	
-	<!-- @entiyt.name@ 明细页 -->
+	<!-- @entity.name@ 明细页 -->
 	<definition name="@component.name@.@entity.config.name@.detail" extends="default.manager">
 	    <put-attribute name="default-center" value="@component.name@.@entity.config.name@.detail.center"></put-attribute>
 	</definition>

@@ -12,10 +12,10 @@
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
 		<spring.version>4.0.4.RELEASE</spring.version>
-		<spring.data.jpa.version>1.5.2.RELEASE</spring.data.jpa.version>
+		<spring.data.jpa.version>1.6.0.RELEASE</spring.data.jpa.version>
 		<spring.data.redis.version>1.2.1.RELEASE</spring.data.redis.version>
 		<spring-data-mongodb.version>1.5.0.RELEASE</spring-data-mongodb.version>
-		<hibernate.version>4.3.4.Final</hibernate.version>
+		<hibernate.version>4.2.12.Final</hibernate.version>
 		<hibernate-validator.version>5.1.1.Final</hibernate-validator.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.14</log4j.version>
@@ -34,12 +34,14 @@
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<java.validation.version>1.1.0.Final</java.validation.version>
 		<jackson.version>2.3.3</jackson.version>
+		<gson.version>2.2.4</gson.version>
 		<commons-collections.version>3.2.1</commons-collections.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<spring-security.version>3.2.4.RELEASE</spring-security.version>
 		<java.el-api.version>3.0.0</java.el-api.version>
 		<jedis.version>2.4.2</jedis.version>
 		<standard.version>1.1.2</standard.version>
+		<aspectj.version>1.7.4</aspectj.version>
 	</properties>
 	<prerequisites>
 		<maven>3.0.0</maven>
@@ -154,12 +156,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<dependency>
-        <groupId>org.springframework.data</groupId>
-        <artifactId>spring-data-mongodb</artifactId>
-        <version>${spring-data-mongodb.version}</version>
-    </dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${spring-data-mongodb.version}</version>
+		</dependency>
 
 		<!-- PERSISTENCE begin -->
 		<!-- hibernate -->
@@ -219,51 +221,51 @@
 
 
 		<!-- End Hibernate lib define. -->
-		
+
 		<!-- LOGGING begin -->
-			<!-- slf4j -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
+		<!-- slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
 
-			<!-- logback -->
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>${logback.version}</version>
-			</dependency>
+		<!-- logback -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
 
-			<!-- 代码直接调用log4j会被桥接到slf4j -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>log4j-over-slf4j</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
+		<!-- 代码直接调用log4j会被桥接到slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
 
-			<!-- 代码直接调用commons-logging会被桥接到slf4j -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>jcl-over-slf4j</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
+		<!-- 代码直接调用commons-logging会被桥接到slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
 
-			<!-- 代码直接调用java.util.logging会被桥接到slf4j -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>jul-to-slf4j</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
+		<!-- 代码直接调用java.util.logging会被桥接到slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
 
-			<!-- log4jdbc -->
-			<dependency>
-				<groupId>com.googlecode.log4jdbc</groupId>
-				<artifactId>log4jdbc</artifactId>
-				<version>1.2</version>
-				<scope>runtime</scope>
-			</dependency>
-			<!-- LOGGING end -->
+		<!-- log4jdbc -->
+		<dependency>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
+			<version>1.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- LOGGING end -->
 
 		<!-- j2ee web spec -->
 		<dependency>
@@ -279,11 +281,11 @@
 			<version>${jstl.version}</version>
 		</dependency>
 		<dependency>
-	<groupId>taglibs</groupId>
-	<artifactId>standard</artifactId>
-	<version>${standard.version}</version>
-</dependency>
-		
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>${standard.version}</version>
+		</dependency>
+
 		<!-- WEB end -->
 		<!-- TEST begin -->
 		<!-- junit -->
@@ -347,6 +349,12 @@
 			<version>${jackson.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>${commons-collections.version}</version>
@@ -372,6 +380,14 @@
 			<version>${jedis.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -392,7 +408,7 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.version}</version>
 				<configuration>
-					<scanIntervalSeconds>15</scanIntervalSeconds>
+					<scanIntervalSeconds>15000000</scanIntervalSeconds>
 					<webApp>
 						<contextPath>/</contextPath>
 						<defaultsDescriptor>src/main/resources/webdefault.xml</defaultsDescriptor>
@@ -406,10 +422,7 @@
 		</plugins>
 	</build>
 	<profiles>
-		<!-- Config JDK Version <profile> <id>jdk-1.7</id> <activation> <activeByDefault>true</activeByDefault> 
-			<jdk>${jdk.version}</jdk> </activation> <properties> <maven.compiler.source>${jdk.version}</maven.compiler.source> 
-			<maven.compiler.target>${jdk.version}</maven.compiler.target> <maven.compiler.compilerVersion>${jdk.version}</maven.compiler.compilerVersion> 
-			</properties> </profile> -->
+
 		<profile>
 			<id>dev</id>
 			<activation>

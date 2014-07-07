@@ -18,6 +18,7 @@ import com.faceye.component.security.repository.ResourceRepository;
 import com.faceye.component.security.repository.RoleRepository;
 import com.faceye.component.security.service.RoleService;
 import com.faceye.feature.service.impl.BaseServiceImpl;
+import com.faceye.feature.util.ServiceException;
 /**
  * 角色服务类
  * @author @haipenge 
@@ -33,6 +34,17 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long, RoleRepository>
 	@Autowired
 	public RoleServiceImpl(RoleRepository dao) {
 		super(dao);
+	}
+	
+	@Override
+	public void remove(Long id) throws ServiceException {
+             Role role=this.get(id);
+             this.remove(role);
+	}
+
+	@Override
+	public void remove(Role entity) throws ServiceException {
+		dao.delete(entity);
 	}
 
 	@Override

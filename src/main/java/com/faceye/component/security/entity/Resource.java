@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.access.ConfigAttribute;
@@ -111,6 +112,17 @@ public class Resource implements Serializable {
 		}
 		return attributes;
 	}
+	
+	@OneToOne(optional = true, cascade = CascadeType.REMOVE, mappedBy = "resource")
+	private Menu menu=null;
+	public Menu getMenu() {
+		return menu;
+	}
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+	
+	
 	
 }/**@generate-entity-source@**/
 	

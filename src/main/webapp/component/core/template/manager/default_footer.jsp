@@ -2,7 +2,6 @@
 <hr>
 <footer>
 	<p>
-		<s:text name="faceye" />
-		<s:text name="faceye.copyright" />
+		<fmt:message key="copyright"></fmt:message>
 	</p>
 </footer>
