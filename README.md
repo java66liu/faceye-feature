@@ -60,4 +60,11 @@ faceye-feature
        快速启动：mvn clean compile jetty:run -Dmaven.test.skip=true
        测试包：mvn clean compile war:war -P test -Dmaven.test.skip=true
        生长包: mvn clean compile war:war -P product -Dmaven.test.skip=true
+
+
+      2014.08.16
+      1.增加对mongo的支持
+      2.增加队列服务
+      3.增加Redis服务
+      4.扩展JPA,加入动态SQL支持
       
