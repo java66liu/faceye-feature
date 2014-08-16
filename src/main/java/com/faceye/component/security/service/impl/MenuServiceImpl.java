@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.faceye.component.security.entity.Menu;
 import com.faceye.component.security.entity.Resource;
 import com.faceye.component.security.entity.Role;
-import com.faceye.component.security.repository.MenuRepository;
+import com.faceye.component.security.repository.jpa.MenuRepository;
 import com.faceye.component.security.service.MenuService;
 import com.faceye.component.security.service.ResourceService;
 import com.faceye.component.security.service.RoleService;

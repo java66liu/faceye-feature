@@ -16,7 +16,7 @@ import com.faceye.feature.util.ServiceException;
  * haipenge@gmail.com
 *  Create Date:2014年4月12日
  */
-
+@Service
 public class RedisServiceImpl implements RedisService {
    
 	@Autowired

@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.faceye.component.security.entity.Resource;
 import com.faceye.component.security.entity.Role;
-import com.faceye.component.security.repository.ResourceRepository;
-import com.faceye.component.security.repository.RoleRepository;
+import com.faceye.component.security.repository.jpa.ResourceRepository;
+import com.faceye.component.security.repository.jpa.RoleRepository;
 import com.faceye.component.security.service.RoleService;
 import com.faceye.feature.service.impl.BaseServiceImpl;
 import com.faceye.feature.util.ServiceException;

@@ -1,4 +1,4 @@
-package com.faceye.feature.repository;
+package com.faceye.feature.repository.jpa;
 
 import java.io.Serializable;
 import java.util.Map;

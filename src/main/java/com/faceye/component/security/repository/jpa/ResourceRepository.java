@@ -1,10 +1,10 @@
-package com.faceye.component.security.repository;
+package com.faceye.component.security.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.faceye.component.security.entity.Resource;
-import com.faceye.feature.repository.BaseRepository;
+import com.faceye.feature.repository.jpa.BaseRepository;
 /**
  * Resource 实体DAO
  * @author @haipenge 

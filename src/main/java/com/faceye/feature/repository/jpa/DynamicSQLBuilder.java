@@ -1,4 +1,4 @@
-package com.faceye.feature.repository;
+package com.faceye.feature.repository.jpa;
 
 import java.util.ArrayList;
 import java.util.Iterator;

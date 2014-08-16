@@ -15,7 +15,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
 import com.faceye.component.security.entity.Resource;
-import com.faceye.component.security.repository.ResourceRepository;
+import com.faceye.component.security.repository.jpa.ResourceRepository;
 import com.faceye.component.security.service.ResourceService;
 import com.faceye.component.security.service.RoleService;
 import com.faceye.feature.service.impl.BaseServiceImpl;

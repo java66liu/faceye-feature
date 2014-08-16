@@ -1,4 +1,4 @@
-package com.faceye.component.security.repository;
+package com.faceye.component.security.repository.jpa;
 
 import java.util.List;
 
