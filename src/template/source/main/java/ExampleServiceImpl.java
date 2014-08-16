@@ -12,17 +12,15 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.faceye.component.@component.name@.entity.@entity.name@;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.faceye.feature.repository.DynamicSpecifications;
-import com.faceye.component.@component.name@.repository.@entity.name@Repository;
+import com.faceye.component.@component.name@.repository.jpa.@entity.name@Repository;
 import com.faceye.feature.repository.SearchFilter;
 import com.faceye.component.@component.name@.service.@entity.name@Service;
 import com.faceye.feature.service.impl.BaseServiceImpl;
 import com.faceye.feature.util.ServiceException;
 
 @Service
-@Transactional
 public class @entity.name@ServiceImpl extends BaseServiceImpl<@entity.name@, Long, @entity.name@Repository> implements @entity.name@Service {
 
 	@Autowired

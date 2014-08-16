@@ -77,4 +77,6 @@ public class ExampleRepositoryTestCase extends BaseRepositoryTestCase {
 		Assert.isTrue(page != null && page.getTotalElements() == 25 && page.getNumberOfElements() == 5);
 
 	}
+	
+	
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.faceye.component.@component.name@.entity.@entity.name@;
+import com.faceye.component.@component.name@.doc.@entity.name@;
 import com.faceye.component.@component.name@.service.@entity.name@Service;
 
 
