@@ -14,7 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.util.Assert;
 
 import com.faceye.feature.entity.Example;
-import com.faceye.feature.repository.SearchFilter;
+import com.faceye.feature.repository.jpa.SearchFilter;
 import com.faceye.feature.service.ExampleService;
 
 /**

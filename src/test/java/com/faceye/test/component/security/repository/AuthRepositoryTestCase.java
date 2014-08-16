@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
-import com.faceye.component.security.repository.AuthRepository;
+import com.faceye.component.security.repository.jpa.AuthRepository;
 import com.faceye.test.feature.repository.BaseRepositoryTestCase;
 
 public class AuthRepositoryTestCase  extends BaseRepositoryTestCase{

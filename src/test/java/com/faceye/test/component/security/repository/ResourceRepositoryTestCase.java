@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import com.faceye.component.security.entity.Resource;
-import com.faceye.component.security.repository.ResourceRepository;
+import com.faceye.component.security.repository.jpa.ResourceRepository;
 import com.faceye.test.feature.repository.BaseRepositoryTestCase;
 /**
  * Resource DAO 测试
