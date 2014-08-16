@@ -370,7 +370,7 @@
 		<property name="class.name.prefix" value="Example"></property>
 		<if>
 			<!-- 如果使用的是jpa做持久化 -->
-			<equals arg1="${repository.type}" arg1="mongo">
+			<equals arg1="${repository.type}" arg2="mongo">
 			</equals>
 			<then>
 				<property name="repository.entity.package" value="doc"></property>
