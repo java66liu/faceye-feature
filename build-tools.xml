@@ -366,23 +366,29 @@
 		</replace>
 
 		<!-- 移动java文件 -->
-		<property name="repository.entity.package" value="entity"></property>
-		<property name="class.name.prefix" value="Example"></property>
+
 		<if>
 			<!-- 如果使用的是jpa做持久化 -->
-			<equals arg1="${repository.type}" arg2="mongo">
-			</equals>
+			<equals arg1="${repository.type}" arg2="mongo"></equals>
 			<then>
 				<property name="repository.entity.package" value="doc"></property>
 				<property name="class.name.prefix" value="Document"></property>
 			</then>
+			<elseif>
+			    <equals arg1="${repository.type}" arg2="jpa"></equals>
+				<then>
+					<property name="repository.entity.package" value="entity"></property>
+					<property name="class.name.prefix" value="Example"></property>
+				</then>
+			</elseif>
 		</if>
-
+		<echo message="${repository.entity.package}" />
 		<move file="${output.dir}/source/main/java/${class.name.prefix}.java"
-			tofile="${component.path}/doc/${entity.name}.java" encoding="UTF-8"></move>
+			tofile="${component.path}/${repository.entity.package}/${entity.name}.java"
+			encoding="UTF-8"></move>
 		<move
 			file="${output.dir}/source/main/java/${class.name.prefix}Repository.java"
-			tofile="${component.path}/repository/mongo/${entity.name}Repository.java"
+			tofile="${component.path}/repository/${repository.type}/${entity.name}Repository.java"
 			encoding="UTF-8"></move>
 
 		<move
@@ -548,12 +554,29 @@
 				<property name="property.desc" value="${property.method}"></property>
 			</then>
 		</if>
+		<!-- 追加方法与属性到原实体 -->
+
+		<if>
+			<equals arg1="${repository.type}" arg2="mongo"></equals>
+			<then>
+				<property name="repository.entity.package" value="doc"></property>
+				<property name="class.name.prefix" value="Entity"></property>
+			</then>
+			<elseif>
+				<equals arg1="${repository.type}" arg2="jpa"></equals>
+				<then>
+					<property name="repository.entity.package" value="entity"></property>
+					<property name="class.name.prefix" value="Document"></property>
+				</then>
+			</elseif>
+		</if>
+
 		<property name="component.path"
 			value="${basedir}/src/main/java/${package.path}/component/${component.name}"></property>
 		<copy todir="${output.dir}/source/main/java" overwrite="true"
 			encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${basedir}/src/template/source/main/java">
-				<include name="EntityMethod.java"></include>
+				<include name="${class.name.prefix}Method.java"></include>
 			</fileset>
 		</copy>
 		<copy todir="${output.dir}/source/main/resources/i18n" overwrite="true"
@@ -581,18 +604,12 @@
 			<replacefilter token="@entity.name@" value="${entity.name}"></replacefilter>
 			<replacefilter token="@entity.config.name@" value="${entity.config.name}"></replacefilter>
 		</replace>
-		<!-- 追加方法与属性到原实体 -->
-		<property name="repository.entity.package" value="entity"></property>
-		<if>
-			<equals arg1="${repository.type}" arg2="mongo"></equals>
-			<then>
-				<property name="repository.entity.package" value="doc"></property>
-			</then>
-		</if>
+
+		<echo message="----------${repository.entity.package}"></echo>
 		<replaceregexp encoding="UTF-8" flags="g">
 			<regexp pattern="}/\*\*@generate-entity-source@\*\*/" />
 			<substitution expression="" />
-			<fileset dir="${component.path}/${repository.entity.package}/">
+			<fileset dir="${component.path}/${repository.entity.package}">
 				<include name="${entity.name}.java" />
 			</fileset>
 		</replaceregexp>
@@ -600,7 +617,7 @@
 			destfile="${component.path}/${repository.entity.package}/${entity.name}.java"
 			append="true" fixlastline="true">
 			<fileset dir="${output.dir}/source/main/java/">
-				<include name="EntityMethod.java" />
+				<include name="${class.name.prefix}Method.java" />
 			</fileset>
 		</concat>
 		<!-- 追加properties. -->
