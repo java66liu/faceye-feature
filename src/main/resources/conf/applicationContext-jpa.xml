@@ -72,7 +72,7 @@
 	<jpa:repositories base-package="com.faceye"
 		transaction-manager-ref="transactionManager"
 		entity-manager-factory-ref="entityManagerFactory"
-		factory-class="com.faceye.feature.repository.impl.BaseRepositoryFactoryBean"
+		factory-class="com.faceye.feature.repository.jpa.impl.BaseRepositoryFactoryBean"
 		repository-impl-postfix="Impl">
 	</jpa:repositories>
 	
