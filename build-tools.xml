@@ -560,13 +560,13 @@
 			<equals arg1="${repository.type}" arg2="mongo"></equals>
 			<then>
 				<property name="repository.entity.package" value="doc"></property>
-				<property name="class.name.prefix" value="Entity"></property>
+				<property name="class.name.prefix" value="Document"></property>
 			</then>
 			<elseif>
 				<equals arg1="${repository.type}" arg2="jpa"></equals>
 				<then>
 					<property name="repository.entity.package" value="entity"></property>
-					<property name="class.name.prefix" value="Document"></property>
+					<property name="class.name.prefix" value="Example"></property>
 				</then>
 			</elseif>
 		</if>
