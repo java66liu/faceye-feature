@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<!-- <parent> <groupId>org.faceye</groupId> <artifactId>faceye-feature</artifactId> 
+	<!-- <parent> <groupId>org.faceye</groupId> <artifactId>faceye-school-feature</artifactId> 
 		<version>1.0</version> <relativePath>../parent/</relativePath> </parent> -->
 	<groupId>com.faceye.feature</groupId>
-	<artifactId>faceye-feature</artifactId>
+	<artifactId>faceye-school-feature</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
-	<name>faceye-feature</name>
+	<name>faceye-school-feature</name>
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
 		<spring.version>4.0.4.RELEASE</spring.version>

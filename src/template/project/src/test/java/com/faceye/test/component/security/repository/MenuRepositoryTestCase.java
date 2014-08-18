@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import com.faceye.component.security.entity.Menu;
-import com.faceye.component.security.repository.MenuRepository;
+import com.faceye.component.security.repository.jpa.MenuRepository;
 import com.faceye.test.feature.repository.BaseRepositoryTestCase;
 /**
  * Menu DAO 测试

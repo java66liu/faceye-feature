@@ -17,6 +17,8 @@ import com.faceye.component.@component.name@.doc.@entity.name@;
 import com.faceye.component.@component.name@.service.@entity.name@Service;
 
 
+
+import com.faceye.component.resource.doc.TeachingPlan;
 import com.faceye.feature.controller.BaseController;
 import com.faceye.feature.util.HttpUtil;
 
@@ -81,6 +83,9 @@ public class @entity.name@Controller extends BaseController<@entity.name@, Long,
 	 */
 	@RequestMapping("/save")
 	public String save(@entity.name@ entity, RedirectAttributes redirectAttributes) {
+		if(null!=entity&&entity.getId()==null){
+			entity.setId(this.sequenceService.getNextSequence(@entity.name@.class.getName()));
+		}
 		this.service.save(entity);
 		return "redirect:/@component.name@/@entity.config.name@/home";
 	}

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import com.faceye.component.security.entity.Role;
-import com.faceye.component.security.repository.RoleRepository;
+import com.faceye.component.security.repository.jpa.RoleRepository;
 import com.faceye.test.feature.repository.BaseRepositoryTestCase;
 /**
  * Role DAO 测试

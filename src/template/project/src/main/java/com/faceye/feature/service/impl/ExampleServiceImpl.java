@@ -12,9 +12,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.faceye.feature.entity.Example;
-import com.faceye.feature.repository.DynamicSpecifications;
-import com.faceye.feature.repository.ExampleRepository;
-import com.faceye.feature.repository.SearchFilter;
+import com.faceye.feature.repository.jpa.DynamicSpecifications;
+import com.faceye.feature.repository.jpa.ExampleRepository;
+import com.faceye.feature.repository.jpa.SearchFilter;
 import com.faceye.feature.service.ExampleService;
 import com.faceye.feature.util.ServiceException;
 

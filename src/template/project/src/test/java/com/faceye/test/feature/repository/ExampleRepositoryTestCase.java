@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.util.Assert;
 
 import com.faceye.feature.entity.Example;
-import com.faceye.feature.repository.ExampleRepository;
+import com.faceye.feature.repository.jpa.ExampleRepository;
 
 public class ExampleRepositoryTestCase extends BaseRepositoryTestCase {
 	@Autowired

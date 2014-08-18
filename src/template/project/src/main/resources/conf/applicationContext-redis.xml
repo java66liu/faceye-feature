@@ -14,18 +14,34 @@
 	<bean id="jedisConnectionFactory"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
 		p:host-name="localhost" p:port="6379" p:use-pool="true" />
-	
+
 	<!-- redis template definition -->
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
-		p:connection-factory-ref="jedisConnectionFactory" />
+		p:connection-factory-ref="jedisConnectionFactory">
+		<property name="KeySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+		</property>
+		<!-- 
+		<property name="ValueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+		</property>
+		<property name="HashKeySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+		</property>
+		<property name="HashValueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+		</property>
+		 -->
+	</bean>
 
 	<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
 		p:connection-factory-ref="jedisConnectionFactory" />
-<!-- declare Redis Cache Manager 
-	<cache:annotation-driven />
-	
-	<bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
-		c:template-ref="redisTemplate" />
-		-->
+	<!-- declare Redis Cache Manager <cache:annotation-driven /> <bean id="cacheManager" 
+		class="org.springframework.data.redis.cache.RedisCacheManager" c:template-ref="redisTemplate" 
+		/> -->
 
 </beans>  

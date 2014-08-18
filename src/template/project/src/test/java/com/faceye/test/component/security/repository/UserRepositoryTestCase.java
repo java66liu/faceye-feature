@@ -14,10 +14,8 @@ import org.springframework.util.Assert;
 
 import com.faceye.component.security.entity.Role;
 import com.faceye.component.security.entity.User;
-import com.faceye.component.security.repository.RoleRepository;
-import com.faceye.component.security.repository.UserRepository;
-import com.faceye.component.security.repository.impl.Auth;
-import com.faceye.feature.entity.Example;
+import com.faceye.component.security.repository.jpa.RoleRepository;
+import com.faceye.component.security.repository.jpa.UserRepository;
 import com.faceye.test.feature.repository.BaseRepositoryTestCase;
 
 /**

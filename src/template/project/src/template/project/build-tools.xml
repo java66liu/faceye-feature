@@ -651,18 +651,8 @@
 		
 		<copy todir="${basedir}/src/template/project" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${output.dir}/project">
-				<exclude name="**/**/*Example*.*"></exclude>
-				<exclude name="**/**/*example*.*"></exclude>
+				<include name="**/**/**.*"></include>
 			</fileset>
 		</copy>
-	</target>
-	<!-- 升级指定模块 -->
-	<target name="update-component">
-	    <input name="输入项目根目录" addProperty="update.dir"/>
-	    <copy todir="${update.dir}" overwrite="true" encoding="UTF-8" outputencoding="UTF-8">
-	        <fileset dir="${basedir}">
-	            <include name="**/**/**.*"></include>
-	        </fileset>
-	    </copy>
 	</target>
 </project>

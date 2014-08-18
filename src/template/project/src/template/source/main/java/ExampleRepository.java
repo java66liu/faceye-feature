@@ -1,4 +1,4 @@
-package com.faceye.component.@component.name@.repository;
+package com.faceye.component.@component.name@.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
