@@ -1,6 +1,6 @@
 #Author @haipenge
 #@component.name@ @entity.name@  properties Config
-
+@component.name@.@entity.config.name@=@entity.title@
 @component.name@.@entity.config.name@.manager=@entity.title@管理
 @component.name@.@entity.config.name@.edit=编辑@entity.title@
 @component.name@.@entity.config.name@.add=新增@entity.title@

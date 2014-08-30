@@ -30,7 +30,7 @@
 		<echo>****6.hibernate</echo>
 		<echo>****7.maven</echo>
 		<echo>****8.ant</echo>
-		<echo>****Github:https://github.com/haipenge/faceye-feature.git
+		<echo>****Github:https://github.com/haipenge/faceye-school-feature.git
 		</echo>
 		<echo>****与作者联系--></echo>
 		<echo>****Author:@haipenge</echo>
@@ -163,7 +163,7 @@
 		<replace dir="${output.dir}/project"  encoding="UTF-8">
 		    <exclude name="pom.xml"></exclude>
 			<replacefilter token="com.faceye" value="${generate.project.package.name}"></replacefilter>
-			<replacefilter token="faceye-" value="${generate.project.name}-"></replacefilter>
+			<replacefilter token="faceye-school-" value="${generate.project.name}-"></replacefilter>
 		</replace>
 		<!-- 替换数据库信息 -->
 		<replace dir="${output.dir}/project/src/main"  encoding="UTF-8">
@@ -191,7 +191,7 @@
 		</copy>
 		<replace dir="${generate.project.manager.path}"  encoding="UTF-8">
 			<include name="pom.xml"></include>
-			<replacefilter token="faceye-feature" value="${generate.project.name}-manager"></replacefilter>
+			<replacefilter token="faceye-school-feature" value="${generate.project.name}-manager"></replacefilter>
 		</replace>
 	</target>
 	<!-- 创建项目web前台 -->
@@ -209,7 +209,7 @@
 		</copy>
 		<replace dir="${generate.project.web.path}"  encoding="UTF-8">
 			<include name="pom.xml"></include>
-			<replacefilter token="faceye-feature" value="${generate.project.name}-web"></replacefilter>
+			<replacefilter token="faceye-school-feature" value="${generate.project.name}-web"></replacefilter>
 		</replace>
 	</target>
 	<!-- 创建移动服务端 -->
@@ -232,7 +232,7 @@
 		</copy>
 		<replace dir="${generate.project.server.path}"  encoding="UTF-8">
 			<include name="pom.xml"></include>
-			<replacefilter token="faceye-feature" value="${generate.project.name}-server"></replacefilter>
+			<replacefilter token="faceye-school-feature" value="${generate.project.name}-server"></replacefilter>
 		</replace>
 	</target>
 	<!-- 删除项目管理后台 -->

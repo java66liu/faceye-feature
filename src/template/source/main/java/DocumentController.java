@@ -21,6 +21,14 @@ import com.faceye.component.@component.name@.service.@entity.name@Service;
 import com.faceye.component.resource.doc.TeachingPlan;
 import com.faceye.feature.controller.BaseController;
 import com.faceye.feature.util.HttpUtil;
+/**
+ * @entity.name@ 控制器
+ * 数据库表:@component.name@_@entity.config.name@
+ * @Description @entity.title@ Web 层控制器
+ * @author @haipenge 
+ * haipenge@gmail.com
+*  Create Date:2014年5月21日
+ */
 
 @Controller
 @Scope("prototype")

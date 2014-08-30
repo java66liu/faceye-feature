@@ -76,9 +76,6 @@
 		repository-impl-postfix="Impl">
 	</jpa:repositories>
 	
-
-
-
 	<bean
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 

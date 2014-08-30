@@ -37,7 +37,7 @@
 						       <fmt:message key="global.remove"></fmt:message>
 						   </a>
 						</td>
-					<tr>
+					</tr>
 				</c:forEach>
 			</table>
 		</div>

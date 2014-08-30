@@ -19,7 +19,13 @@ import com.faceye.feature.repository.SearchFilter;
 import com.faceye.component.@component.name@.service.@entity.name@Service;
 import com.faceye.feature.service.impl.BaseServiceImpl;
 import com.faceye.feature.util.ServiceException;
-
+/**
+ * @entity.name@ ORM 实体
+ * @Description @entity.title@ 服务层实现类
+ * @author @haipenge 
+ * haipenge@gmail.com
+*  Create Date:2014年5月21日
+ */
 @Service
 public class @entity.name@ServiceImpl extends BaseServiceImpl<@entity.name@, Long, @entity.name@Repository> implements @entity.name@Service {
 

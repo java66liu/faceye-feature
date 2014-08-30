@@ -1,4 +1,4 @@
-<%@ include file="/components/core/taglib/taglib.jsp"%>
+<%@ include file="/component/core/taglib/taglib.jsp"%>
 <link rel="stylesheet" type="text/css" href="<c:url value="/js/component/@component.name@/@entity.config.name@/@entity.config.name@.css"/>" />
 <script type="text/javascript" src="<c:url value="/js/component/@component.name@/@entity.config.name@/@entity.config.name@.js"/>"></script>
 <div class="panel panel-primary">

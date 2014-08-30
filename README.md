@@ -4,6 +4,10 @@ faceye-feature
       开始之前：
       1.配置${ANT_HOME},${M2_HOME}
       2.下载ant-contrib 放置至:${ANT_HOME}/lib
+      3.安装Redis,并保证可用
+      4.安装mongo，并保证可用
+      5.安装mysql,并根据需要进入src/resources/db/init.sql
+      6.修改src/main/filters/dev.properties，配置本机环境变量
       
       FaceYe 项目自助化工具
       解决问题:解决项目初期搭建调试与集成耗时现像

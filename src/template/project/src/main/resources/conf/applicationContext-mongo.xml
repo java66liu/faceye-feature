@@ -26,17 +26,17 @@
 
 	<description>Spring常量配置</description>
 
-	<mongo:mongo host="localhost" port="27017">
+	<mongo:mongo host="${mongo.host}" port="${mongo.port}">
 		<mongo:options connections-per-host="8"
 			threads-allowed-to-block-for-connection-multiplier="4"
 			connect-timeout="1000" max-wait-time="1500" auto-connect-retry="true"
 			socket-keep-alive="true" socket-timeout="1500" slave-ok="true"
 			write-number="1" write-timeout="0" write-fsync="true" />
 	</mongo:mongo>
-	<mongo:db-factory dbname="database" mongo-ref="mongo"
-		username="joe" password="secret" />
+	<mongo:db-factory dbname="${mongo.db}" mongo-ref="mongo"
+		username="${mongo.user}" password="${mongo.password}" />
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
 	</bean>
-
+	<mongo:repositories base-package="com.faceye.component.*.repository.mongo" />
 </beans>

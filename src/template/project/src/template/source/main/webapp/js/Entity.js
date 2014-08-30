@@ -6,3 +6,5 @@ var @entity.name@={
   init:function(){
   }
 };
+
+$(document).ready(function(){@entity.name@.init();});

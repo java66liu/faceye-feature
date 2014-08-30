@@ -7,6 +7,7 @@ import com.faceye.component.@component.name@.doc.@entity.name@;
 import com.faceye.feature.repository.mongo.BaseMongoRepository;
 /**
  * @entity.name@ 实体DAO
+ * @description：@entity.title@ 持久化
  * @author @haipenge 
  * haipenge@gmail.com
 *  Create Date:2014年5月20日

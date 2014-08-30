@@ -69,16 +69,13 @@
 	<!-- 定义aspectj -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
-	<jpa:repositories base-package="com.faceye"
+	<jpa:repositories base-package="com.faceye.*.*.repository.jpa"
 		transaction-manager-ref="transactionManager"
 		entity-manager-factory-ref="entityManagerFactory"
-		factory-class="com.faceye.feature.repository.impl.BaseRepositoryFactoryBean"
+		factory-class="com.faceye.feature.repository.jpa.impl.BaseRepositoryFactoryBean"
 		repository-impl-postfix="Impl">
 	</jpa:repositories>
 	
-
-
-
 	<bean
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 

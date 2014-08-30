@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * @entity.name@ ORM 实体
  * 数据库表:@component.name@_@entity.config.name@
+ * @Description @entity.title@ 持久化实体对像
  * @author @haipenge 
  * haipenge@gmail.com
 *  Create Date:2014年5月21日
