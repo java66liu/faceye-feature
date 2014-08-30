@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @Description @entity.title@ 持久化实体对像
  * @author @haipenge 
  * haipenge@gmail.com
-*  Create Date:2014年5月21日
+ *  Create Date:2014年5月21日
  */
 @Document(collection="@component.name@_@entity.config.name@")
 public class @entity.name@ implements Serializable {
