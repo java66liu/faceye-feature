@@ -13,6 +13,7 @@ import com.faceye.feature.repository.jpa.BaseRepository;
 *  Create Date:2014年5月20日
  */
 public interface MenuRepository extends BaseRepository<Menu,Long> {
+	 
 	/**
 	 * 查询子节点
 	 * @todo
