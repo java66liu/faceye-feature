@@ -615,7 +615,7 @@
 		</replaceregexp>
 		<concat
 			destfile="${component.path}/${repository.entity.package}/${entity.name}.java"
-			append="true" fixlastline="true">
+			append="true" fixlastline="true" encoding="UTF-8">
 			<fileset dir="${output.dir}/source/main/java/">
 				<include name="${class.name.prefix}Method.java" />
 			</fileset>
